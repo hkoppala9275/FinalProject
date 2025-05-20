@@ -14,3 +14,13 @@ How to run the program:
 Create a folder by cloning or unzipping this repository.
 Type cd to that folder in a terminal.
 Launch the Python script tricksy_battle.py by typing ```bash
+
+
+# INST 126 Final Project: Tricksy Battle
+
+## Description  
+“Tricksy Battle” is a two-player trick-taking card game implemented in Python.  
+- **Base version** (`src/tricksy_battle.py`): standard gameplay with shuffling, dealing, following suit, scoring, and early termination.  
+- **Advanced version** (`advanced/tricksy_battle_advanced.py`): adds timing, performance measurement, game-history logging, and score-progression visualization.
+
+## Repository Structure
