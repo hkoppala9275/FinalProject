@@ -1,7 +1,11 @@
+# File: advanced/random_quiz.py
 #!/usr/bin/env python3
-import random
+"""
+A simple script to shuffle quiz questions and select a random subset using the standard random module.
+"""
+import random  # Provides functions for randomization
 
-QUESTIONS = [
+# Predefined pool of quiz questions\ nQUESTIONS = [
     "What is a variable?",
     "Explain the difference between list and tuple.",
     "How does a Python dictionary work?",
@@ -13,21 +17,30 @@ QUESTIONS = [
 ]
 
 def get_quiz(num_questions=5):
-    """Shuffle QUESTIONS and return num_questions of them."""
+    """
+    Shuffle QUESTIONS and return a list of num_questions items.
+    Raises ValueError if requested more questions than available.
+    """
     if num_questions > len(QUESTIONS):
-        raise ValueError("Requested more questions than available.")
-    pool = QUESTIONS.copy()
-    random.shuffle(pool)
-    return pool[:num_questions]
+        raise ValueError(f"Requested {num_questions} questions, but only {len(QUESTIONS)} available.")
+    pool = QUESTIONS.copy()            # Make a shallow copy to avoid modifying the original list
+    random.shuffle(pool)               # In-place shuffle of the copy
+    selected = pool[:num_questions]    # Take the first num_questions questions
+    return selected
 
 if __name__ == "__main__":
     import argparse
-    parser = argparse.ArgumentParser(description="Generate a random quiz")
-    parser.add_argument("-n", "--number", type=int, default=5,
-                        help="Number of questions to include")
+    parser = argparse.ArgumentParser(
+        description="Generate a randomized quiz from a fixed question pool"
+    )
+    parser.add_argument(
+        "-n", "--number", type=int, default=5,
+        help="Number of questions to include (default: 5)"
+    )
     args = parser.parse_args()
 
+    # Generate quiz and print each question with numbering
     quiz = get_quiz(args.number)
     print("Your randomized quiz:")
-    for i, q in enumerate(quiz, 1):
-        print(f"{i}. {q}")
+    for idx, q in enumerate(quiz, start=1):
+        print(f"{idx}. {q}")
